@@ -65,7 +65,7 @@ const calculator = () => {
             else if (buttonClass.contains("equal")){
                 if (oneFlag === 1 && operatorFlag === 1 && !isNaN(two)){
                     twoFlag = 1;
-                    let ans = operate(one, two, operator);
+                    const ans = operate(one, two, operator);
                     displayAns(ans, displayText);
                     one = ans;
                     twoFlag = 0;
