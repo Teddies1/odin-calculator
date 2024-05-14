@@ -11,7 +11,7 @@ const divide = (one, two) => {
     if (two === 0){
         return "DON'T EVEN TRY";
     }
-    return one / two;
+    return (one / two).toFixed(3);
 }
 
 const multiply = (one, two) => {
@@ -64,6 +64,9 @@ const calculator = () => {
                     twoFlag = 1;
                     let ans = operate(one, two, operator);
                     displayAns(ans, displayText);
+                    one = ans;
+                    twoFlag = 0;
+                    operatorFlag = 0;
                 }
             }
             else if (buttonClass.contains("clear")){
