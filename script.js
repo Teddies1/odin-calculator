@@ -53,7 +53,8 @@ const calculator = () => {
                 }
             }
             else if (buttonClass.contains("operation")){
-                if (operatorFlag === 0){
+                console.log(isNaN(+displayText.textContent));
+                if (operatorFlag === 0 && displayText.textContent.length !== 0){
                     operator = clickOperator(e, displayText);
                     oneFlag = 1;
                     operatorFlag = 1;
