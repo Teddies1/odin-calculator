@@ -34,9 +34,12 @@ const operate = (one, two, operator) => {
 }
 
 const calculator = () => {
-    var one, operator, two;    
+    var one = 0; 
+    var operator; 
+    var two = 0;    
     var oneFlag = 0;
     var twoFlag = 0;
+    var ansFlag = 0;
     var operatorFlag = 0;
     var displayText = document.querySelector(".result");
     var buttons = document.querySelectorAll("button");
@@ -53,7 +56,6 @@ const calculator = () => {
                 }
             }
             else if (buttonClass.contains("operation")){
-                console.log(isNaN(+displayText.textContent));
                 if (operatorFlag === 0 && displayText.textContent.length !== 0){
                     operator = clickOperator(e, displayText);
                     oneFlag = 1;
@@ -76,6 +78,14 @@ const calculator = () => {
                 twoFlag = 0;
                 operatorFlag = 0;
             }
+            else if (buttonClass.contains("backspace")){
+                if (oneFlag === 0){
+                    one = clickBackspace(one, displayText);
+                }
+                else{
+                    two = clickBackspace(two, displayText);
+                }
+            }
         });
     });
 }
@@ -97,7 +107,6 @@ const clickNumberTwo = (e, displayText) => {
     }
     displayText.textContent += e.target.textContent;
     two = +displayText.textContent;
-
     return two;
 }
 
@@ -106,6 +115,14 @@ const clickOperator = (e, displayText) => {
     displayText.textContent = operator;
 
     return operator;
+}
+
+const clickBackspace = (number, displayText) => {
+    displayText.textContent = displayText.textContent.slice(0, -1);
+    console.log(number);
+    number = Math.floor(number / 10);
+    console.log(number);
+    return number;
 }
 
 calculator();
