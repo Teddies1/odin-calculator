@@ -1,8 +1,8 @@
-var one, operator, two;    
-var oneFlag = 0;
-var twoFlag = 0;
-var operatorFlag = 0;
-var displayText = document.querySelector(".result");
+// var one, operator, two;    
+// var oneFlag = 0;
+// var twoFlag = 0;
+// var operatorFlag = 0;
+// var displayText = document.querySelector(".result");
 
 const add = (one, two) => {
     return one + two;
@@ -38,24 +38,94 @@ const operate = (one, two, operator) => {
     }
 }
 
+// const calculator = () => {
+//     var buttons = document.querySelectorAll("button");
+//     buttons.forEach((button) => {
+//         button.addEventListener("click", (e) => {
+//             let buttonClass = e.target.classList;
+//             if (buttonClass.contains("number")){
+//                 clickNumber(e);
+//             }
+//             else if (buttonClass.contains("operation")){
+//                 if (operatorFlag === 0){
+//                     clickOperator(e);
+//                 }
+//             }
+//             else if (buttonClass.contains("equal")){
+//                 if (oneFlag === 1 && operatorFlag === 1 && !isNaN(two)){
+//                     twoFlag = 1;
+//                     let ans = operate(one, two, operator);
+//                     displayAns(ans);
+//                 }
+//             }
+//             else if (buttonClass.contains("clear")){
+//                 displayText.innerHTML = "";
+//                 oneFlag = 0;
+//                 twoFlag = 0;
+//                 operatorFlag = 0;
+//             }
+//         });
+//     });
+// }
+
+// const displayAns = (ans) => {
+//     displayText.textContent = ans;
+// }
+
+// const clickNumber = (e) => {
+//     if (oneFlag === 0){
+//         displayText.textContent += e.target.textContent;
+//         one = +displayText.textContent;
+//     }
+//     else if (twoFlag === 0){
+//         if (isNaN(+displayText.textContent)){
+//             displayText.innerHTML = "";
+//         }
+//         displayText.textContent += e.target.textContent;
+//         two = +displayText.textContent;
+//     }
+    
+// }
+
+// const clickOperator = (e) => {
+//     operator = e.target.textContent;
+//     displayText.textContent = operator;
+//     oneFlag = 1;
+//     operatorFlag = 1;
+// }
+
 const calculator = () => {
+    var one, operator, two;    
+    var oneFlag = 0;
+    var twoFlag = 0;
+    var operatorFlag = 0;
+    var displayText = document.querySelector(".result");
     var buttons = document.querySelectorAll("button");
+
     buttons.forEach((button) => {
         button.addEventListener("click", (e) => {
             let buttonClass = e.target.classList;
             if (buttonClass.contains("number")){
-                clickNumber(e);
+                if (oneFlag === 0){
+                    one = clickNumberOne(e, displayText);
+                    console.log(one);
+                }
+                else if (twoFlag === 0){
+                    two = clickNumberTwo(e, displayText);
+                }
             }
             else if (buttonClass.contains("operation")){
                 if (operatorFlag === 0){
-                    clickOperator(e);
+                    operator = clickOperator(e, displayText);
+                    oneFlag = 1;
+                    operatorFlag = 1;
                 }
             }
             else if (buttonClass.contains("equal")){
                 if (oneFlag === 1 && operatorFlag === 1 && !isNaN(two)){
                     twoFlag = 1;
                     let ans = operate(one, two, operator);
-                    displayAns(ans);
+                    displayAns(ans, displayText);
                 }
             }
             else if (buttonClass.contains("clear")){
@@ -68,30 +138,32 @@ const calculator = () => {
     });
 }
 
-const displayAns = (ans) => {
+const displayAns = (ans, displayText) => {
     displayText.textContent = ans;
 }
 
-const clickNumber = (e) => {
-    if (oneFlag === 0){
-        displayText.textContent += e.target.textContent;
-        one = +displayText.textContent;
-    }
-    else if (twoFlag === 0){
-        if (isNaN(+displayText.textContent)){
-            displayText.innerHTML = "";
-        }
-        displayText.textContent += e.target.textContent;
-        two = +displayText.textContent;
-    }
-    
+const clickNumberOne = (e, displayText) => {
+    displayText.textContent += e.target.textContent;
+    one = +displayText.textContent;
+
+    return one;
 }
 
-const clickOperator = (e) => {
+const clickNumberTwo = (e, displayText) => {
+    if (isNaN(+displayText.textContent)){
+        displayText.innerHTML = "";
+    }
+    displayText.textContent += e.target.textContent;
+    two = +displayText.textContent;
+
+    return two;
+}
+
+const clickOperator = (e, displayText) => {
     operator = e.target.textContent;
     displayText.textContent = operator;
-    oneFlag = 1;
-    operatorFlag = 1;
+
+    return operator;
 }
 
 calculator();
