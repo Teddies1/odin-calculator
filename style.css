@@ -34,6 +34,15 @@ button:hover {
 #zero {
     width: 160px;
 }
+
+.operation {
+    background-color: orange;
+}
+
+.equal {
+    background-color: #1f2937;
+    color: white;
+}
 .result {
     display: flex;
     justify-content: center;
