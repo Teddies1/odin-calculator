@@ -25,10 +25,10 @@ const operate = (one, two, operator) => {
     if (operator === "-"){
         return subtract(one, two);
     }
-    if (operator === "*"){
+    if (operator === "×"){
         return multiply(one, two);
     }
-    if (operator === "/"){
+    if (operator === "÷"){
         return divide(one, two);
     }
 }
@@ -47,7 +47,6 @@ const calculator = () => {
             if (buttonClass.contains("number")){
                 if (oneFlag === 0){
                     one = clickNumberOne(e, displayText);
-                    console.log(one);
                 }
                 else if (twoFlag === 0){
                     two = clickNumberTwo(e, displayText);
@@ -84,7 +83,7 @@ const displayAns = (ans, displayText) => {
 const clickNumberOne = (e, displayText) => {
     displayText.textContent += e.target.textContent;
     one = +displayText.textContent;
-
+    
     return one;
 }
 
